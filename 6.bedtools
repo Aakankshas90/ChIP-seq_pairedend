@@ -9,5 +9,8 @@ or
 #sort and merge bed file
 bedtools sort -i peaks.bed | bedtools merge > peaks_mergepeaks.bed
 
-# find common peaks between hdl and mhd merged
+# find common peaks between 1 and 2 and write overlaps, even multiples, to output
 bedtools intersect -a 1_peaks.broadPeak -b 2_peaks.broadPeak -sorted -wo > 1_2_peaks.bed
+
+# find and print only overlapping peaks to output
+bedtools intersect -a 1_peaks.broadPeak -b  2_peaks.broadPeak -sorted -u > 1_2_peaks_u.bed
