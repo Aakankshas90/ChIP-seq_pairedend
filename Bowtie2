@@ -1,0 +1,7 @@
+# Make index of reference genome and align paired end reads to the reference using bowtie2
+
+## Index of reference genome
+bowtie2-build --threads 40 -f reference_genome/TAIR10_chr_all.fas reference_genome/TAIR10_chr_all-index
+
+## Alignment
+bowtie2 -p 20 -x reference_genome/TAIR10_chr_all-index -1 wt1_R1.fq -2 wt1_R2.fq -S wt1.sam 2> wt1_log.txt
