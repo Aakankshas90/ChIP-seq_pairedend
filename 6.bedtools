@@ -1,10 +1,10 @@
 # concatenate files (rep 1, 2, 3)
 cat 1_peaks.broadPeak 2_peaks.broadPeak 3_peaks.broadPeak > peaks_cat.bed
 
-#sort bed file
+# sort bed file
 bedtools sort -i peaks_cat.bed > peaks.sorted.bed
 
-#merge bed files
+# merge bed files
 bedtools merge -i peaks.sorted.bed > peaks_mergepeaks.bed
 bedtools merge -i peaks.sorted.bed > peaks_mergepeaks.bed -c 1,4 -o count,collapse
 ### -c specifies column numbers
@@ -23,6 +23,9 @@ bedtools intersect -a 1_peaks.broadPeak -b  2_peaks.broadPeak -sorted -u > 1_2_p
 
 # find unique peaks in 1 as compared to 2
 bedtools intersect -a 1.bed -b 2.bed -sorted -v -wo > 1_unique.bed
+
+# bedtools slop to select 100 bp regions around the summits for motif analysis
+bedtools slop -i bammerge_summits.bed -g reference_genome/TAIR10_chr_all.fas.fai -l 50 -r 49 > bammerge_summits100bp.bed
 
 # fasta from bed for motif analysis
 bedtools getfasta -fi reference_genome/TAIR10_chr_all.fas -bed 1_unique.bed -fo 1_unique.fa
