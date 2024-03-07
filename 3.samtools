@@ -15,6 +15,16 @@ samtools index -@ 16 wt.noCM.bam
 
 # filter
 samtools view -b -F 1804 -q 30 wt_sort_markdup.bam -@ 16 -o wt_filt.bam
+### samflag = 1804
+    - read unmapped (0x4)
+    - mate unmapped (0x8)*
+    - not primary alignment (0x100)
+    - read fails platform/vendor quality checks (0x200)
+    - read is PCR or optical duplicate (0x400)
+      - *Warning: Flag(s) and 0x8 cannot be set when read is not paired
 
 # index
 samtools index -@ 16 wt_filt.bam
+
+#merge bam files
+samtools merge merged.bam 1.nochrCM_fltsort.bam 2.nochrCM_fltsort.bam 4.nochrCM_fltsort.bam
