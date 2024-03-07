@@ -1,0 +1,22 @@
+# For removing "Illumina Universal primer" and perorming quality trimming from paired end ChIP-seq data
+## Bowtie2 does not take input reads lower than 35 bp long
+
+java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar PE path/to/read1/*_R1_001.fastq \
+path/to/read2/*_R2_001.fastq \
+path/to/output_paired_forward_R1.fq.gz \
+path/to/output_unpaired_forward_R1.fq.gz \
+path/to/output_paired_reverse_R2.fq.gz \
+path/to/output_unpaired_reverse_R2.fq.gz \
+ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:35
+
+###This will perform the following:
+
+- Remove adapters (ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2 = ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip threshold>:<simple clip threshold>)
+  -fastaWithAdaptersEtc: specifies the path to a fasta file containing all the adapters, PCR sequences etc. The naming of the various sequences within this file determines how they are used. See below.
+  -seedMismatches: specifies the maximum mismatch count which will still allow a full match to be performed
+  -palindromeClipThreshold: specifies how accurate the match between the two 'adapter ligated' reads must be for PE palindrome read alignment.
+  -simpleClipThreshold: specifies how accurate the match between any adapter etc. sequence must be against a read
+- Remove leading low quality or N bases (below quality 3) (LEADING:3)
+- Remove trailing low quality or N bases (below quality 3) (TRAILING:3)
+- Scan the read with a 4-base wide sliding window, cutting when the average quality per base drops below 15 (SLIDINGWINDOW:4:15)
+- Drop reads below the 35 bases long (MINLEN:35)
