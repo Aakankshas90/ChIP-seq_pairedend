@@ -1,8 +1,14 @@
+# concatenate files (rep 1, 2, 3)
+cat 1_peaks.broadPeak 2_peaks.broadPeak 3_peaks.broadPeak > peaks_cat.bed
+
 #sort bed file
-bedtools sort -i peaks.bed > peaks.sorted.bed
+bedtools sort -i peaks_cat.bed > peaks.sorted.bed
 
 #merge bed files
 bedtools merge -i peaks.sorted.bed > peaks_mergepeaks.bed
+bedtools merge -i peaks.sorted.bed > peaks_mergepeaks.bed -c 1,4 -o count,collapse
+### -c specifies column numbers
+### -o specifies actions to be taken on those columns
 
 or
 
@@ -14,3 +20,9 @@ bedtools intersect -a 1_peaks.broadPeak -b 2_peaks.broadPeak -sorted -wo > 1_2_p
 
 # find and print only overlapping peaks to output
 bedtools intersect -a 1_peaks.broadPeak -b  2_peaks.broadPeak -sorted -u > 1_2_peaks_u.bed
+
+# find unique peaks in 1 as compared to 2
+bedtools intersect -a 1.bed -b 2.bed -sorted -v -wo > 1_unique.bed
+
+# fasta from bed for motif analysis
+bedtools getfasta -fi reference_genome/TAIR10_chr_all.fas -bed 1_unique.bed -fo 1_unique.fa
