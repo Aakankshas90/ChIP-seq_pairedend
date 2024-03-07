@@ -1,0 +1,7 @@
+# package: subread
+
+## Make a custom "SAF" file which featureCounts needs:
+awk 'OFS="\t" {print $1"-"$2+1"-"$3, $1, $2+1, $3, "+"}' peaks.broadPeak > peaks.saf
+
+## run featureCounts (add -T for multithreading)
+featureCounts -T 16 -p -a peaks.saf -F SAF -o out.txt seq.bam
