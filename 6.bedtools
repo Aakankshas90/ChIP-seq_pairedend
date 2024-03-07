@@ -1,0 +1,13 @@
+#sort bed file
+bedtools sort -i peaks.bed > peaks.sorted.bed
+
+#merge bed files
+bedtools merge -i peaks.sorted.bed > peaks_mergepeaks.bed
+
+or
+
+#sort and merge bed file
+bedtools sort -i peaks.bed | bedtools merge > peaks_mergepeaks.bed
+
+# find common peaks between hdl and mhd merged
+bedtools intersect -a 1_peaks.broadPeak -b 2_peaks.broadPeak -sorted -wo > 1_2_peaks.bed
