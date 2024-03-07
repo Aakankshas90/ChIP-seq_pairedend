@@ -1,1 +1,1 @@
-# ChIP-seq_pairedend
+# ChIP-seq paired-end data analysis
