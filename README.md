@@ -36,9 +36,10 @@ Example execution:
 # Step 1: Trimming
 bash scripts/02_trimming.sh sample_R1.fastq.gz sample_R2.fastq.gz output/
 
-```bash
 
-✂️ Trimming (Example Step)
+---
+
+## ✂️ Trimming (Example Step)
 
 Adapter removal and quality trimming is performed using Trimmomatic.
 
@@ -51,7 +52,10 @@ MINLEN:35 → Discard reads shorter than 35 bp
 
 Reads shorter than 35 bp are removed to improve alignment quality and reduce ambiguous mapping.
 
-🛠 Tools Used
+
+---
+
+## 🛠 Tools Used
 Trimmomatic
 Bowtie2
 SAMtools
@@ -59,31 +63,46 @@ deepTools
 MACS2
 bedtools
 
-📁 Directory Structure
+
+---
+
+## 📁 Directory Structure
 scripts/        # Individual scripts for each step
 input/          # Input FASTQ files
 output/         # Output files
 
-🚀 How to Use
+
+---
+
+## 🚀 How to Use
 Clone the repository:
 git clone https://github.com/Aakankshas90/ChIP-seq_pairedend.git
 cd ChIP-seq_pairedend
 Run each step manually using the provided scripts (see example above).
 Modify paths and parameters in scripts as needed.
 
-⚠️ Limitations
+
+---
+
+## ⚠️ Limitations
 Processes one dataset at a time
 Requires manual execution of each step
 No built-in parallelization or workflow management
 Paths and tool locations may need to be adjusted by the user
 
-🚀 Future Improvements
+
+---
+
+## 🚀 Future Improvements
 Add batch processing (looping over multiple samples)
 Convert to a Nextflow-based workflow
 Add containerization (Docker/Singularity)
 Improve parameterization and configuration handling
 
-📌 Notes
+
+---
+
+## 📌 Notes
 Optimized for Arabidopsis thaliana datasets
 Can be adapted for other organisms with appropriate reference files
 
