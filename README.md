@@ -36,6 +36,8 @@ Example execution:
 # Step 1: Trimming
 bash scripts/02_trimming.sh sample_R1.fastq.gz sample_R2.fastq.gz output/
 
+```bash
+
 ✂️ Trimming (Example Step)
 
 Adapter removal and quality trimming is performed using Trimmomatic.
