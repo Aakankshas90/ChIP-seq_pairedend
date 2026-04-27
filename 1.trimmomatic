@@ -1,3 +1,4 @@
+# After performing QC check of sequences with fastQC, trimmomatic is used
 # For removing "Illumina Universal primer" and perorming quality trimming from paired end ChIP-seq data
 ## Bowtie2 does not take input reads lower than 35 bp long
 
