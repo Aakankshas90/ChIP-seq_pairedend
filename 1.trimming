@@ -1,5 +1,5 @@
 # After performing QC check of sequences with fastQC, trimmomatic is used
-# For removing "Illumina Universal primer" and perorming quality trimming from paired end ChIP-seq data
+# For removing "Illumina Universal primer", identified with fastQC, and perorming quality trimming from paired end ChIP-seq data
 ## Bowtie2 does not take input reads lower than 35 bp long
 
 java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar PE path/to/read1/*_R1_001.fastq \
