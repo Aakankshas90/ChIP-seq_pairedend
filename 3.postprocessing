@@ -1,4 +1,6 @@
-# turn sam file into bam file
+# Convert SAM to BAM, sort, mark duplicates, filter reads, and prepare files for downstream analysis using :contentReference[oaicite:0]{index=0} and :contentReference[oaicite:1]{index=1}
+
+## Convert SAM to BAM
 samtools view -S -b wt.sam -@ 16 > wt.bam
 
 #sort bam file
@@ -7,7 +9,7 @@ samtools sort wt.bam -@ 16 -o wt_sort.bam
 # sambamba mark the duplicated reads
 sambamba markdup wt_sort.bam wt_sort_markdup.bam
 
-#Remove Chromosomes C and M, but no filter
+## Remove chloroplast (ChrC) and mitochondrial (ChrM) chromosomes
 samtools view -b wt_sort_markdup.bam Chr1 Chr2 Chr3 Chr4 Chr5 > wt.noCM.bam
 
 #index
