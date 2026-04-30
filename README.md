@@ -37,17 +37,30 @@ Each step of the pipeline is executed independently:
 ## 🔄 Pipeline Overview
 
 ```mermaid
-graph TD
-A[Raw FASTQ] --> B[FastQC + MultiQC]
-B --> C[Trimmomatic]
-C --> D[Bowtie2 Alignment]
-D --> E[SAMtools + Sambamba Processing]
-E --> F[deepTools QC & Signal]
-F --> G[MACS2 Peak Calling]
-G --> H[BEDTools Processing]
-H --> I[IDR Analysis]
-I --> J[FRiP Calculation]
-J --> K[Final Outputs]
+## 🔄 Pipeline Overview
+
+%% Initial processing
+A[Raw FASTQ] --> B[Quality Control<br/>(FastQC + MultiQC)]
+B --> C[Trimming<br/>(Trimmomatic)]
+C --> D[Alignment<br/>(Bowtie2)]
+D --> E[Post-processing<br/>(SAMtools + Sambamba)]
+
+%% Branch 1: Signal-level QC (independent of peak calling)
+E --> F[Signal Processing & QC<br/>(deepTools)]
+
+%% Branch 2: Peak calling
+E --> G[Peak Calling<br/>(MACS2)]
+
+%% Downstream peak-based analyses (independent of each other)
+G --> H[Peak Processing<br/>(BEDTools)]
+G --> I[Reproducibility<br/>(IDR)]
+G --> J[FRiP Score<br/>(featureCounts)]
+
+%% Final outputs
+F --> K[QC Plots & Coverage Tracks]
+H --> L[Processed Peak Sets]
+I --> L
+J --> L
 ```
 
 ---
