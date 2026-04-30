@@ -81,7 +81,7 @@ bash scripts/03_alignment.sh
 bash scripts/04_postprocessing.sh
 ```
 
-✂️ Trimming (Example Step)
+## ✂️ Trimming (Example Step)
 
 Adapter removal and quality trimming is performed using Trimmomatic.
 
@@ -96,7 +96,7 @@ Reads shorter than 35 bp are removed to improve alignment quality and reduce amb
 
 ---
 
-🛠 Tools Used
+## 🛠 Tools Used
 FastQC
 MultiQC
 Trimmomatic
@@ -111,7 +111,7 @@ featureCounts (Subread package)
 
 ---
 
-📁 Directory Structure
+## 📁 Directory Structure
 scripts/        # Individual scripts for each step
 input/          # Input FASTQ files
 output/         # Output files
@@ -119,8 +119,10 @@ output/         # Output files
 
 Clone the repository:
 
+```bash
 git clone https://github.com/Aakankshas90/ChIP-seq_pairedend.git
 cd ChIP-seq_pairedend
+```
 
 Run each step manually using the provided scripts (see example above).
 Modify paths, file names, and parameters in scripts as needed.
@@ -129,23 +131,23 @@ Note: Thread numbers (e.g., -@ 16, -p 20) should be adjusted based on available 
 
 ---
 
-⚠️ Limitations
-Processes one dataset at a time
-Requires manual execution of each step
-No built-in parallelization or workflow management
-Paths and tool locations may need to be adjusted by the user
+## ⚠️ Limitations
+- Processes one dataset at a time
+- Requires manual execution of each step
+- No built-in parallelization or workflow management
+- Paths and tool locations may need to be adjusted by the user
 
 ---
 
-🚀 Future Improvements
-Add batch processing (looping over multiple samples)
-Convert to a Nextflow-based workflow
-Add containerization (Docker/Singularity)
-Integrate automated QC reporting
-Improve parameterization and configuration handling
+## 🚀 Future Improvements
+- Add batch processing (looping over multiple samples)
+- Convert to a Nextflow-based workflow
+- Add containerization (Docker/Singularity)
+- Integrate automated QC reporting
+- Improve parameterization and configuration handling
 
 ---
 
-📌 Notes
-Optimized for Arabidopsis thaliana datasets
-Can be adapted for other organisms with appropriate reference genome and annotation files
+## 📌 Notes
+- Optimized for *Arabidopsis thaliana* datasets
+- Can be adapted for other organisms with appropriate reference genome and annotation files
