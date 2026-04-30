@@ -1,7 +1,7 @@
 # ChIP-seq Paired-End Analysis (Modular Bash Workflow)
 
 This repository contains a step-wise, modular ChIP-seq analysis workflow implemented using individual Bash scripts.  
-The pipeline was developed for *Arabidopsis thaliana* datasets and is designed to provide learning, transparency and flexibility in processing.
+The pipeline was developed for *Arabidopsis thaliana* datasets and is designed to provide learning, transparency, and flexibility in processing.
 
 ---
 
@@ -22,24 +22,52 @@ This approach is particularly useful for learning, teaching, and exploratory ana
 
 Each step of the pipeline is executed independently:
 
-1. Trimming  
-2. Alignment  
-3,4. Post-processing (sorting, indexing)  
-5. Peak Calling
-6. Counting
-7,8. QC
-
-Example execution:
-
-```bash
-
-# Step 1: Trimming
-bash scripts/02_trimming.sh sample_R1.fastq.gz sample_R2.fastq.gz output/
-```
+1. Quality Control (FastQC + MultiQC)  
+2. Trimming  
+3. Alignment  
+4. Post-processing (SAM/BAM processing, filtering)  
+5. Signal processing and visualization (deepTools)  
+6. Peak calling (MACS2)  
+7. Peak processing and comparison (bedtools)  
+8. Reproducibility analysis (IDR)  
+9. FRiP score calculation  
 
 ---
 
-## ✂️ Trimming (Example Step)
+## 🔄 Pipeline Overview
+
+```mermaid
+graph TD
+A[Raw FASTQ] --> B[FastQC + MultiQC]
+B --> C[Trimmomatic]
+C --> D[Bowtie2 Alignment]
+D --> E[SAMtools + Sambamba Processing]
+E --> F[deepTools QC & Signal]
+F --> G[MACS2 Peak Calling]
+G --> H[BEDTools Processing]
+H --> I[IDR Analysis]
+I --> J[FRiP Calculation]
+J --> K[Final Outputs]
+
+---
+
+## 🚀 Example Execution
+
+```bash
+# Step 1: Quality control
+bash scripts/01_fastqc.sh
+
+# Step 2: Trimming
+bash scripts/02_trimming.sh sample_R1.fastq.gz sample_R2.fastq.gz output/
+
+# Step 3: Alignment
+bash scripts/03_alignment.sh
+
+# Step 4: Post-processing
+bash scripts/04_postprocessing.sh
+```
+
+✂️ Trimming (Example Step)
 
 Adapter removal and quality trimming is performed using Trimmomatic.
 
@@ -52,57 +80,58 @@ MINLEN:35 → Discard reads shorter than 35 bp
 
 Reads shorter than 35 bp are removed to improve alignment quality and reduce ambiguous mapping.
 
-
 ---
 
-## 🛠 Tools Used
+🛠 Tools Used
+FastQC
+MultiQC
 Trimmomatic
 Bowtie2
 SAMtools
+Sambamba
 deepTools
 MACS2
-bedtools
-
+BEDTools
+IDR
+featureCounts (Subread package)
 
 ---
 
-## 📁 Directory Structure
+📁 Directory Structure
 scripts/        # Individual scripts for each step
 input/          # Input FASTQ files
 output/         # Output files
+🚀 How to Use
 
-
----
-
-## 🚀 How to Use
 Clone the repository:
+
 git clone https://github.com/Aakankshas90/ChIP-seq_pairedend.git
 cd ChIP-seq_pairedend
-Run each step manually using the provided scripts (see example above).
-Modify paths and parameters in scripts as needed.
 
+Run each step manually using the provided scripts (see example above).
+Modify paths, file names, and parameters in scripts as needed.
+
+Note: Thread numbers (e.g., -@ 16, -p 20) should be adjusted based on available CPU resources.
 
 ---
 
-## ⚠️ Limitations
+⚠️ Limitations
 Processes one dataset at a time
 Requires manual execution of each step
 No built-in parallelization or workflow management
 Paths and tool locations may need to be adjusted by the user
 
-
 ---
 
-## 🚀 Future Improvements
+🚀 Future Improvements
 Add batch processing (looping over multiple samples)
 Convert to a Nextflow-based workflow
 Add containerization (Docker/Singularity)
+Integrate automated QC reporting
 Improve parameterization and configuration handling
-
 
 ---
 
-## 📌 Notes
+📌 Notes
 Optimized for Arabidopsis thaliana datasets
-Can be adapted for other organisms with appropriate reference files
-
+Can be adapted for other organisms with appropriate reference genome and annotation files
