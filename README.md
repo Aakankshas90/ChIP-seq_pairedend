@@ -48,6 +48,7 @@ G --> H[BEDTools Processing]
 H --> I[IDR Analysis]
 I --> J[FRiP Calculation]
 J --> K[Final Outputs]
+```
 
 ---
 
