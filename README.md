@@ -1,6 +1,6 @@
 # ChIP-seq Paired-End Analysis (Modular Bash Workflow)
 
-This repository contains a step-wise, modular ChIP-seq analysis workflow implemented using individual Bash scripts.  
+This repository contains a step-wise, modular ChIP-seq/DAP-seq analysis workflow implemented using individual Bash scripts.  
 The pipeline was developed for *Arabidopsis thaliana* datasets and is designed to provide learning, transparency, and flexibility in processing.
 
 ---
